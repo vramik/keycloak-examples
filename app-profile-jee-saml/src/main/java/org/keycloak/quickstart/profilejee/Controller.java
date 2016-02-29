@@ -54,7 +54,7 @@ public class Controller {
     private SamlSession getAccount(HttpServletRequest req) {
         HttpSession session = req.getSession();
     
-        System.out.println("!!!!!! getAccount " + session.getAttribute(SamlSession.class.getName() + " " + req.getUserPrincipal());
+        System.out.println("!!!!!! getAccount " + session.getAttribute(SamlSession.class.getName()) + " " + req.getUserPrincipal());
         return (SamlSession)session.getAttribute(SamlSession.class.getName());
     }
 
