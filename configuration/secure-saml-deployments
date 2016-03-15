@@ -1,4 +1,4 @@
-<secure-deployment name="sd-app-profile-jee-saml.war">
+<secure-deployment name="app-profile-jee-saml.war">
     <SP entityID="app-profile-jee-saml" sslPolicy="EXTERNAL">
         <Keys>
             <Key signing="true" encryption="true">
