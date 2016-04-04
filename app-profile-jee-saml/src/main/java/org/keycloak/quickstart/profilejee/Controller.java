@@ -45,6 +45,9 @@ public class Controller {
     }
 
     public String getUsername(HttpServletRequest req) {
+    	System.out.println("!!!! getUsername " + req.getUserPrincipal().getName());
+    	System.out.println("!!!! username " + getFriendlyAttrib(req, "username"));
+    	System.out.println("!!!! userName " + getFriendlyAttrib(req, "userName"));
         return req.getUserPrincipal().getName();
     }
 
