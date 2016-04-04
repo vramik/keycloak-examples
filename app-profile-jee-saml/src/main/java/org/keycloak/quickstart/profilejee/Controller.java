@@ -53,6 +53,8 @@ public class Controller {
 
     private String getFriendlyAttrib(HttpServletRequest req, String attribName) {
     	SamlPrincipal principal = getAccount(req);
+    	System.out.println("!!!! getFriendlyNames " + principal.getFriendlyNames());
+    	System.out.println("!!!! getAttributeNames " + principal.getAttributeNames());
         return principal.getFriendlyAttribute(attribName);
     }
 
