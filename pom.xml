@@ -12,7 +12,7 @@
     <properties>
         <version.resteasy>3.0.12.Final</version.resteasy>
         <version.wildfly.plugin>1.0.1.Final</version.wildfly.plugin>
-        <version.keycloak>1.6.0.Final</version.keycloak>
+        <version.keycloak>1.9.2.Final</version.keycloak>
         <version.httpclient>4.5.1</version.httpclient>
         <version.jboss.servlet-api>1.0.2.Final</version.jboss.servlet-api>
     </properties>
@@ -91,6 +91,11 @@
             <dependency>
                 <groupId>org.keycloak</groupId>
                 <artifactId>keycloak-adapter-spi</artifactId>
+                <version>${version.keycloak}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.keycloak</groupId>
+                <artifactId>keycloak-saml-adapter-api-public</artifactId>
                 <version>${version.keycloak}</version>
             </dependency>
             <dependency>

@@ -47,12 +47,11 @@
             <artifactId>keycloak-adapter-spi</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- <dependency>
-            <groupId>org.keycloak.quickstart</groupId>
-            <artifactId>keycloak-quickstart-app-profile-jee</artifactId>
-            <type>war</type>
-            <version>${project.version}</version>
-        </dependency> -->
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-saml-adapter-api-public</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
