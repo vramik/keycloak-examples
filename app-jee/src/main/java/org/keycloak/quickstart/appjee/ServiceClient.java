@@ -41,7 +41,6 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
 import org.keycloak.KeycloakSecurityContext;
-import org.keycloak.adapters.AdapterUtils;
 import org.keycloak.util.JsonSerialization;
 
 /**
@@ -86,18 +85,22 @@ public class ServiceClient {
     }
 
     private static String getServiceUrl(HttpServletRequest req, KeycloakSecurityContext session) {
-//        String uri = req.getServletContext().getInitParameter(SERVICE_URI_INIT_PARAM_NAME);
-//        if (uri != null) return uri;
+        String uri = req.getServletContext().getInitParameter(SERVICE_URI_INIT_PARAM_NAME);
+        if (uri != null && !uri.contains("localhost"))
+        	return uri;
 
-        String uri = AdapterUtils.getOriginForRestCalls(req.getRequestURL().toString(), session);
-        if (uri != null) return uri + "/service";
+    	String ip = req.getLocalAddr();
 
-        String ip = "localhost";
-        try {
-	    ip = java.net.InetAddress.getLocalHost().getHostAddress();
-        } catch (Exception e){
-            e.printStackTrace();
+        if (ip != null){
+	        ip = "localhost";
+	        try {
+	        	ip = java.net.InetAddress.getLocalHost().getHostAddress();
+	        } catch (Exception e){
+	            e.printStackTrace();
+	        }
         }
+        
+        System.out.println("!!!!! ip " + ip);
 
         return "http://" + ip + ":8080/service";
     }
