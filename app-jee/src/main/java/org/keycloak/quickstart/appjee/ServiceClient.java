@@ -100,52 +100,13 @@ public class ServiceClient {
 	        }
         }
         
-        System.out.println("!!!!! ip " + ip);
-
         return "http://" + ip + ":8080/service";
     }
     
-    public static HttpClient createHttpClient_AcceptsUntrustedCerts() throws Exception {
-        HttpClientBuilder b = HttpClientBuilder.create();
-     
-        // setup a Trust Strategy that allows all certificates.
-        //
-        SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
-            public boolean isTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
-                return true;
-            }
-        }).build();
-        b.setSslcontext( sslContext);
-     
-        // don't check Hostnames, either.
-        //      -- use SSLConnectionSocketFactory.getDefaultHostnameVerifier(), if you don't want to weaken
-        HostnameVerifier hostnameVerifier = SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
-     
-        // here's the special part:
-        //      -- need to create an SSL Socket Factory, to use our weakened "trust strategy";
-        //      -- and create a Registry, to register it.
-        //
-        SSLConnectionSocketFactory sslSocketFactory = new SSLConnectionSocketFactory(sslContext, hostnameVerifier);
-        Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder.<ConnectionSocketFactory>create()
-                .register("http", PlainConnectionSocketFactory.getSocketFactory())
-                .register("https", sslSocketFactory)
-                .build();
-     
-        // now, we create connection-manager using our Registry.
-        //      -- allows multi-threaded use
-        PoolingHttpClientConnectionManager connMgr = new PoolingHttpClientConnectionManager( socketFactoryRegistry);
-        b.setConnectionManager( connMgr);
-     
-        // finally, build the HttpClient;
-        //      -- done!
-        HttpClient client = b.build();
-        return client;
-    }
-
     public static String callService(HttpServletRequest req, KeycloakSecurityContext session, String action) throws Failure {
         HttpClient client = null;
         try {
-        	client = createHttpClient_AcceptsUntrustedCerts();
+            client = new DefaultHttpClient();
             HttpGet get = new HttpGet(getServiceUrl(req, session) + "/" + action);
             if (session != null) {
                 get.addHeader("Authorization", "Bearer " + session.getTokenString());
