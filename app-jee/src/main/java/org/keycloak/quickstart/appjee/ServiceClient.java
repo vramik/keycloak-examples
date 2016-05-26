@@ -86,6 +86,9 @@ public class ServiceClient {
 
     private static String getServiceUrl(HttpServletRequest req, KeycloakSecurityContext session) {
         String uri = req.getServletContext().getInitParameter(SERVICE_URI_INIT_PARAM_NAME);
+
+System.out.println("!!!!!!!!!!!! uri " + uri);
+
         if (uri != null && !uri.contains("localhost"))
         	return uri;
 
