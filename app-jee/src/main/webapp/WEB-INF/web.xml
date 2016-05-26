@@ -24,8 +24,8 @@
 
     <context-param>
         <param-name>serviceUrl</param-name>
-        <param-value>http://localhost:8080/service</param-value>
-        <!--param-value>http://service-demo.cloudapps.example.com:8080/service</param-value-->
+        <!--param-value>http://localhost:8080/service</param-value-->
+        <param-value>http://service-demo.cloudapps.example.com:8080/service</param-value>
     </context-param>
     
     <security-constraint>
