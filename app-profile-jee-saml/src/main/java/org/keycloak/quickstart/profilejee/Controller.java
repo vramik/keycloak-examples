@@ -16,6 +16,8 @@
  */
 package org.keycloak.quickstart.profilejee;
 
+import java.util.Enumeration;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -65,6 +67,18 @@ public class Controller {
     public String getAccountUri(HttpServletRequest req) {
         String serverPath = findKeycloakServerPath(req);
         String realm = findRealmName(req);
+        
+        Enumeration<String> attNames = req.getAttributeNames();
+        while (attNames.hasMoreElements()){
+        	String attName = attNames.nextElement();
+        	System.out.println("!!!! att " + attName + " " + req.getAttribute(attName));
+        }
+        
+        attNames = req.getHeaderNames();
+        while (attNames.hasMoreElements()){
+        	String attName = attNames.nextElement();
+        	System.out.println("!!!! header " + attName + " " + req.getHeader(attName));
+        }
 
         String uri = KeycloakUriBuilder.fromUri(serverPath).path(ServiceUrlConstants.ACCOUNT_SERVICE_PATH)
                 .queryParam("referrer", "helloworld-app-profile-jee-saml").build(realm).toString();
