@@ -65,8 +65,12 @@ public class Controller {
     public String getAccountUri(HttpServletRequest req) {
         String serverPath = findKeycloakServerPath(req);
         String realm = findRealmName(req);
-        return KeycloakUriBuilder.fromUri(serverPath).path(ServiceUrlConstants.ACCOUNT_SERVICE_PATH)
+
+        String uri = KeycloakUriBuilder.fromUri(serverPath).path(ServiceUrlConstants.ACCOUNT_SERVICE_PATH)
                 .queryParam("referrer", "helloworld-app-profile-jee-saml").build(realm).toString();
+       
+        System.out.println("!!!!! getAccountUri " + uri + " " + serverPath + " " + ServiceUrlConstants.ACCOUNT_SERVICE_PATH);
+        return uri;
     }
 
     // HACK: This is a really bad way to find the realm name, but I can't
