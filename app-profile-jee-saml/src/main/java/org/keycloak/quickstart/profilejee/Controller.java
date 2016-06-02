@@ -79,6 +79,19 @@ public class Controller {
         	String attName = attNames.nextElement();
         	System.out.println("!!!! header " + attName + " " + req.getHeader(attName));
         }
+        
+        attNames = req.getParameterNames();
+        while (attNames.hasMoreElements()){
+        	String attName = attNames.nextElement();
+        	System.out.println("!!!! param " + attName + " " + req.getParameter(attName));
+        }
+        
+        attNames = req.getSession().getAttributeNames();
+        while (attNames.hasMoreElements()){
+        	String attName = attNames.nextElement();
+        	System.out.println("!!!! session " + attName + " " + req.getSession().getAttribute(attName));
+        }
+        
 
         String uri = KeycloakUriBuilder.fromUri(serverPath).path(ServiceUrlConstants.ACCOUNT_SERVICE_PATH)
                 .queryParam("referrer", "helloworld-app-profile-jee-saml").build(realm).toString();
